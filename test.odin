@@ -37,13 +37,23 @@ main :: proc() {
             grid[i][j] = Cell{i , j, "blue", false}
         }
     }
-    
 
     for i := 0; i < GRID_SIZE; i = i + 1 {
         for j := 0; j < GRID_SIZE; j = j + 1 {
             
             ptr: ^Cell
             ptr = &grid[i][j]
+
+            //ptr.alive = false
+
+            if rand.int_max(2) == 1 {
+                ptr.alive = true
+            }       
+
+
+
+
+
             /*
             hexadecimal decimal equivalent
             ----------- ------------------
@@ -76,6 +86,7 @@ main :: proc() {
             //B0 -> C0 = 16
             //C0 -> C8 = 8
             //8 + 16 + 16 = 40
+            
         
         }
     }
