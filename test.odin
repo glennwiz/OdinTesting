@@ -1,12 +1,32 @@
 package main
 
+/*
+    Maxwell's Daemon, in Gnipahellir's depths, plays a cunning game,
+    With points of memory as his pawns, in entropy's endless frame.
+    Garm, the guardian fierce at Gnipahellir's gate, snarls at each move,
+    Yet the Daemon defies, weaving past and present, in Gnipahellir's groove.
+
+    Those who dare to fail miserably can achieve greatly
+*/
+
+
 import "core:fmt"
 import "core:math/rand"
+import "core:mem"
 
 GRID_SIZE :: 64
 
 // CellGrid defines a 64x64 grid of boolean values
-CellGrid :: [GRID_SIZE][GRID_SIZE]bool
+CellGrid :: [GRID_SIZE][GRID_SIZE]Cell
+
+r : ^[10]bool;
+
+Cell :: struct {
+    x: int,
+    y: int,
+    color: string,
+    alive: bool,
+}
 
 main :: proc() {
 
@@ -14,22 +34,57 @@ main :: proc() {
     grid := CellGrid{}
     for i := 0; i < GRID_SIZE; i = i + 1 {
         for j := 0; j < GRID_SIZE; j = j + 1 {
-            grid[i][j] = false
+            grid[i][j] = Cell{i , j, "blue", false}
         }
     }
     
+
     for i := 0; i < GRID_SIZE; i = i + 1 {
         for j := 0; j < GRID_SIZE; j = j + 1 {
             
-            v := rand.int_max(2)
-            grid[i][j] = v == 1            
+            ptr: ^Cell
+            ptr = &grid[i][j]
+            /*
+            hexadecimal decimal equivalent
+            ----------- ------------------
+            0           0
+            1           1
+            2           2
+            3           3
+            4           4
+            5           5
+            6           6
+            7           7
+            8           8
+            9           9
+            A           10
+            B           11
+            C           12
+            D           13
+            E           14
+            F           15
+            */
+            size := size_of(Cell)
+            // Use fmt.printf with %p to print the memory address
+            fmt.printf("Memory address of Struct Cell: %p\n", ptr)
+            fmt.printf("Size of cell in bytes: %d\n", size)
+            fmt.printf("Size of cell in bits: %d\n", size * 8)
+
+            //B131FAFAA0 A0
+            //B131FAFAC8 C8
+            //A0 -> B0 = 16
+            //B0 -> C0 = 16
+            //C0 -> C8 = 8
+            //8 + 16 + 16 = 40
+        
         }
     }
 
     // Print the grid
     for i := 0; i < GRID_SIZE; i = i + 1 {
         for j := 0; j < GRID_SIZE; j = j + 1 {
-            if grid[i][j] {
+            c := grid[i][j]
+            if c.alive {
                 fmt.print("#")
             } else {
                 fmt.print(".")
