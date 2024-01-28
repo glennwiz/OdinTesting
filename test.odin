@@ -57,6 +57,22 @@ main :: proc() {
     fmt.println("b15:", b9)
 
 
+    x : u32 = 0x24_2a_5d_4c
+    x_bytes := transmute([4]byte)x
+
+    fmt.printf("Default: \t%d = %x\t(%02x)\n", x, x, x_bytes) //endianess
+
+    x_le : u32le  = 0x24_2a_5d_4c
+    x_be : u32be  = 0x24_2a_5d_4c 
+
+    x_le_bytes := transmute([4]byte)x_le
+    x_be_bytes := transmute([4]byte)x_be
+
+    fmt.printf("Little Endian: \t%d = %x\t(%02x)\n", x_le, x_le, x_le_bytes)
+    fmt.printf("Big Endian: \t%d = %x\t(%02x)\n", x_be, x_be, x_be_bytes)
+
+
+
 
     fmt.println("-----------------------------------------")
 
@@ -102,9 +118,9 @@ main :: proc() {
             */
             size := size_of(Cell)
             // Use fmt.printf with %p to print the memory address
-            fmt.printf("Memory address of Struct Cell: %p\n", ptr)
-            fmt.printf("Size of cell in bytes: %d\n", size)
-            fmt.printf("Size of cell in bits: %d\n", size * 8)
+            //fmt.printf("Memory address of Struct Cell: %p\n", ptr)
+            //fmt.printf("Size of cell in bytes: %d\n", size)
+            //fmt.printf("Size of cell in bits: %d\n", size * 8)
 
             //B131FAFAA0 A0
             //B131FAFAC8 C8
