@@ -30,6 +30,36 @@ Cell :: struct {
 
 main :: proc() {
 
+    // 128 64 32 16   8 4 2 1
+    // |-------octet--------|
+    // |---nibble--|-nibble-|
+
+    b1 := 0b0000_0001
+    b2 := 0b0000_0010
+    b4 := 0b0000_0100
+    b8 := 0b0000_1000
+    b16 := 0b0001_0000
+    b32 := 0b0010_0000
+    b64 := 0b0100_0000
+    b128 := 0b1000_0000
+
+    b9 := 0b0000_1111
+
+    fmt.println("b1:", b1)
+    fmt.println("b2:", b2)
+    fmt.println("b4:", b4)
+    fmt.println("b8:", b8)
+    fmt.println("b16:", b16)
+    fmt.println("b32:", b32)
+    fmt.println("b64:", b64)
+    fmt.println("128:", b128)
+
+    fmt.println("b15:", b9)
+
+
+
+    fmt.println("-----------------------------------------")
+
     // Create a 64x64 grid of boolean values
     grid := CellGrid{}
     for i := 0; i < GRID_SIZE; i = i + 1 {
@@ -48,11 +78,7 @@ main :: proc() {
 
             if rand.int_max(2) == 1 {
                 ptr.alive = true
-            }       
-
-
-
-
+            }    
 
             /*
             hexadecimal decimal equivalent
